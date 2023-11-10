@@ -4,30 +4,25 @@ using UnityEngine;
 
 public class CameraControls : MonoBehaviour
 {
-    ///Object References
-    [SerializeField] Camera camera;
-
-    //Data
     bool drag;
     Vector3 difference;
-    Vector3 startingPosition;
-    float zoomFactor = 0.2f;
+    Vector3 origin;
+    [SerializeField] Camera mainCamera;
 
-    void Update()
+    void LateUpdate()
     {
-        MoveCamera();
-        ZoomCamera();
-    }   
+        if(Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+            Zoom();
+        }
 
-    void MoveCamera()
-    {
         if(Input.GetMouseButton(2))
         {
-            difference = (camera.ScreenToWorldPoint(Input.mousePosition)) - camera.transform.position;
-            if(drag == false)
+            difference = (mainCamera.ScreenToWorldPoint(Input.mousePosition)) - mainCamera.transform.position;
+            if(!drag)
             {
                 drag = true;
-                startingPosition = camera.ScreenToWorldPoint(Input.mousePosition);
+                origin = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             }
         }
         else
@@ -35,18 +30,24 @@ public class CameraControls : MonoBehaviour
             drag = false;
         }
         if(drag)
-            camera.transform.position = startingPosition - difference;
+        {
+            mainCamera.transform.position = origin - difference;
+        }
     }
 
-    void ZoomCamera()
+    void Zoom()
     {
-        if(Input.GetAxis("Mouse ScrollWheel") < 0f) // zoom in 
+        //Zoom out
+        if(Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            camera.orthographicSize += zoomFactor;
+            mainCamera.orthographicSize++;
+            
         }
-        else if(Input.GetAxis("Mouse ScrollWheel") > 0f) // zoom in 
+        //Zoom in 
+        else if(Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            camera.orthographicSize -= zoomFactor;
+            mainCamera.orthographicSize--;
+            mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, 1f, float.MaxValue);
         }
     }
 }
