@@ -2578,7 +2578,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -20}
-  m_SizeDelta: {x: 79, y: 23}
+  m_SizeDelta: {x: 200, y: 23}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &881013498
 MonoBehaviour:
@@ -3099,7 +3099,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -85}
-  m_SizeDelta: {x: 100, y: 17}
+  m_SizeDelta: {x: 200, y: 17}
   m_Pivot: {x: 0, y: 0.51}
 --- !u!114 &1213508633
 MonoBehaviour:
@@ -3872,7 +3872,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -110}
-  m_SizeDelta: {x: 100, y: 17}
+  m_SizeDelta: {x: 200, y: 17}
   m_Pivot: {x: 0, y: 0.51}
 --- !u!114 &1454269575
 MonoBehaviour:
@@ -4456,7 +4456,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -136}
-  m_SizeDelta: {x: 100, y: 17}
+  m_SizeDelta: {x: 200, y: 17}
   m_Pivot: {x: 0, y: 0.51}
 --- !u!114 &1861195135
 MonoBehaviour:
@@ -4633,6 +4633,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7186862ef7e7a4e91324e328461f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yearManager: {fileID: 1929910080}
+  foodCountText: {fileID: 1213508633}
+  waterCountText: {fileID: 1454269575}
+  populationCountText: {fileID: 1861195135}
 --- !u!1 &1968169671
 GameObject:
   m_ObjectHideFlags: 0
