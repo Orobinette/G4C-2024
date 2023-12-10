@@ -13,14 +13,18 @@ public class FlexibleGridLayout : LayoutGroup
         FixedRows,
         FixedColumns
     }
+    [Space(10)]
     public FitType fitType;
 
+    public bool fitX;
+    public bool fitY;
+
+    [Space(10)]
     public int rows;
     public int columns;
 
     public Vector2 spacing;
-    private Vector2 cellSize;
-    private Vector2 anchorPoint;
+    public Vector2 cellSize;
 
     public override void CalculateLayoutInputHorizontal()
     {
@@ -32,14 +36,17 @@ public class FlexibleGridLayout : LayoutGroup
         {
             case FitType.Uniform:
                 columns = Mathf.CeilToInt(sqrt);
+                fitX = true;
                 break;
 
             case FitType.PrioritizeWidth:
                 columns = Mathf.CeilToInt(sqrt);
+                fitX = true;
                 break;
 
             case FitType.PrioritizeHeight:
                 columns = Mathf.CeilToInt(rectChildren.Count / (float) Mathf.CeilToInt(sqrt));
+                fitX = true;
                 break;
 
             case FitType.FixedRows:
@@ -49,7 +56,8 @@ public class FlexibleGridLayout : LayoutGroup
 
         //Cell dimensions
         float parentWidth = rectTransform.rect.width;
-        cellSize.x = (parentWidth - (padding.left + padding.right) - spacing.x * (columns - 1)) / (float) columns;
+        float stretchedWidth = (parentWidth - (padding.left + padding.right) - spacing.x * (columns - 1)) / (float) columns;
+        cellSize.x = fitX ? stretchedWidth : cellSize.x;
     }
     public override void CalculateLayoutInputVertical()
     {
@@ -59,14 +67,17 @@ public class FlexibleGridLayout : LayoutGroup
         {
             case FitType.Uniform:
                 rows = Mathf.CeilToInt(sqrt);   
+                fitY = true;
                 break;
 
             case FitType.PrioritizeWidth:
                 rows = Mathf.CeilToInt(rectChildren.Count / (float) Mathf.CeilToInt(sqrt));
+                fitY = true;
                 break;
 
             case FitType.PrioritizeHeight:
                 rows = Mathf.CeilToInt(sqrt);
+                fitY = true;
                 break;
 
             case FitType.FixedColumns:
@@ -75,7 +86,8 @@ public class FlexibleGridLayout : LayoutGroup
         }
 
         float parentHeight = rectTransform.rect.height;
-        cellSize.y = (parentHeight - (padding.top + padding.bottom) - spacing.y * (rows - 1)) / (float) rows;
+        float stretchedHeight = (parentHeight - (padding.top + padding.bottom) - spacing.y * (rows - 1)) / (float) rows;
+        cellSize.y = fitY ? stretchedHeight : cellSize.y;
     }
 
     public override void SetLayoutHorizontal()
